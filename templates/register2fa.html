@@ -1,0 +1,41 @@
+{% extends "bootstrap/base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <h2>Register Successfully</h2>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div>
+            <h5>Instructions!</h5>
+            <ul>
+                <li>Download Google Authenticator(<a href="https://apps.apple.com/us/app/google-authenticator/id388497605" target="_blank">IOS</a>/<a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en&gl=US" target="_blank">ANDROID</a>) on your mobile.</li>
+                <li>Press the + Sign on the bottom right of the corner.</li>
+                <li>Choose the <strong>Scan a QR code</strong> method.</li>
+                <li>Scan the below QR code</li>
+                <li>Submit the generated key when login.</li>
+            </ul>
+        </div>
+        <canvas id="qr"></canvas>
+        <p>{{ qr_url }}</p>
+        <a href="{{ url_for('login') }}">
+            <button type="button" class="btn btn-primary">Login</button>
+        </a>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script> 
+<script>
+    (function() {
+        var qr = new QRious({
+            element: document.getElementById('qr'),
+            value: '{{ qr_url }}',
+            size: 300
+        });
+    })();
+</script> 
+
+{% endblock %}

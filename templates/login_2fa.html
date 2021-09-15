@@ -1,0 +1,55 @@
+{% extends "bootstrap/base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="jumbotron text-center p-4">
+                <h2>Authentication</h2>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div>
+                <h5>Instructions!</h5>
+                <ul>
+                    <li>Open Google Authenticator on your mobile.</li>
+                    <li>Enter the 6 digits to below.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <form action="" method="POST">
+                <div class="form-group">
+                    <label for="otp">6 digits keys</label>
+                    <input type="number" class="form-control" id="otp" name="otp" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function copySecret(){
+        var copyText = document.getElementById("secret");
+
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+
+        document.execCommand("copy");
+
+        alert("Successfully copied TOTP secret token!");
+    }
+</script>
+{% endblock %}
